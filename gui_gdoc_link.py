@@ -18,6 +18,11 @@ root.geometry("600x400")
 root.columnconfigure(0, weight=1)
 root.rowconfigure((0,1,2,4), weight=1)
 
+'''clean the entry and text area'''
+def clean_text_areas():
+    user_link_input.delete(0, 'end')
+    text_area.delete('1.0', 'end')
+
 
 #methods for data collection and analysis.
 #accept input from user: insert link and go to where the link leads
@@ -35,6 +40,7 @@ text_area = Text(root, height=12, width=70, wrap=WORD, bg= "white", borderwidth=
 #pack it on window
 text_area.grid(row=5,column=0)
 
+
 #methods for data collection and analysis.
 '''----------------'''
 def analyse_Text(simpleText):
@@ -46,7 +52,7 @@ def analyse_Text(simpleText):
         simple_txt3 = simple_txt2.split('}')
         if(len(simple_txt3) >= 1):
             simple_txt4 = simple_txt3[0]
-            return "user typed: " + simple_txt4
+            return simple_txt4
     return " "
 #method for getting text from user through Entry
 def Show_Text():
@@ -57,17 +63,16 @@ def Show_Text():
     text_html = bs4.BeautifulSoup(res2.text, "html.parser")
     inputelements = text_html.select('script[type="text/javascript"]')
     for inp_element in inputelements:
-    stringinput = str(inp_element)
-    text_area.insert(0, analyse_Text(stringinput))
+        stringinput = str(inp_element)
+        text_area.insert(END, analyse_Text(stringinput))
 
 
 
 #method for display text in the textarea so user can see it.
 def Reset_Text():
-    user_link_input.delete(0, END)
-    text_area.delete(0, END)
+    clean_text_areas()
     show_Text()
-    
+
 
 #buttons: Show Text, Reset
 button_show_text = Button(root, text="Show Text", bg="cyan", command=Show_Text).grid(row=3, column=0)
