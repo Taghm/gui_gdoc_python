@@ -1,0 +1,60 @@
+Last login: Mon May 11 01:20:16 on ttys001
+jeanfrancoisitangayenda@jeans-MacBook-Pro ~ % python
+Python 3.8.2 (v3.8.2:7b3ab5921f, Feb 24 2020, 17:52:18) 
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> z = <a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>
+  File "<stdin>", line 1
+    z = <a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>
+        ^
+SyntaxError: invalid syntax
+>>> z = "<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>"
+  File "<stdin>", line 1
+    z = "<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>"
+                   ^
+SyntaxError: invalid syntax
+>>> z = '<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>'
+>>> z
+'<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>'
+>>> z1 = z.split('<,>')
+>>> z1
+['<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>']
+>>> z
+'<a class="gb1" href="https://mail.google.com/mail/?tab=wm">Gmail</a>'
+>>> z2 =  z.split(" ")
+>>> z2
+['<a', 'class="gb1"', 'href="https://mail.google.com/mail/?tab=wm">Gmail</a>']
+>>> z2[2]
+'href="https://mail.google.com/mail/?tab=wm">Gmail</a>'
+>>> z34 = z2[2].split("href=,>")
+>>> z34
+['href="https://mail.google.com/mail/?tab=wm">Gmail</a>']
+>>> z34 = z2[2].split('href=')
+>>> z34
+['', '"https://mail.google.com/mail/?tab=wm">Gmail</a>']
+>>> z45 = z34[1].split(""""))
+... z45 = z34[1].split("""")
+  File "<stdin>", line 2
+    z45 = z34[1].split("""")
+                           ^
+SyntaxError: EOL while scanning string literal
+>>> z45 = z34[1]
+>>> z45
+'"https://mail.google.com/mail/?tab=wm">Gmail</a>'
+>>> z46 = z45.split(">")
+>>> z46
+['"https://mail.google.com/mail/?tab=wm"', 'Gmail</a', '']
+>>> z46[0]
+'"https://mail.google.com/mail/?tab=wm"'
+>>> import webbrowser
+>>> webbrowser.open_new_tab(z46[0])
+True
+>>> mail = webbrowser.open_new_tab(z46[0])
+>>> mail
+True
+>>> webbrowser.open('https://google.com')
+True
+>>> mail = webbrowser.open(z46[0])
+>>> mail
+True
+>>> 
